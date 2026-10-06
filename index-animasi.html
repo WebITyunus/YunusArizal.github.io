@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Yunus Arizal | Fullstack Laravel · Portfolio & CV</title>
+  <!-- TailwindCSS v3 + Google Fonts + Font Awesome 6 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Konfigurasi kustom tema: warna gelap elegan + aksen neon/aurora -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'Segoe UI', 'sans-serif'],
+            'mono': ['"JetBrains Mono"', 'Fira Code', 'monospace'],
+            'display': ['"Syne"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            'space-dark': '#0B1120',
+            'deeper': '#070C1A',
+            'slate-card': '#111827',
+            'slate-mid': '#1F2937',
+            'glow-cyan': '#06B6D4',
+            'glow-emerald': '#10B981',
+            'accent-cyan': '#22D3EE',
+            'accent-emerald': '#34D399',
+            'soft-gray': '#9CA3AF',
+            'text-light': '#E5E7EB',
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.6s ease-out forwards',
+            'fade-in': 'fadeIn 0.8s ease-out forwards',
+            'slide-left': 'slideLeft 0.5s ease-out forwards',
+            'slide-right': 'slideRight 0.5s ease-out forwards',
+            'scale-in': 'scaleIn 0.4s ease-out forwards',
+            'glow-pulse': 'glowPulse 2s infinite',
+            'border-glow': 'borderGlow 3s ease-in-out infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'shimmer': 'shimmer 2s infinite',
+            'spin-slow': 'spin 8s linear infinite',
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideLeft: { '0%': { opacity: '0', transform: 'translateX(-30px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+            slideRight: { '0%': { opacity: '0', transform: 'translateX(30px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+            scaleIn: { '0%': { opacity: '0', transform: 'scale(0.95)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
+            glowPulse: { '0%,100%': { textShadow: '0 0 2px #06B6D4' }, '50%': { textShadow: '0 0 12px #22D3EE' } },
+            borderGlow: { '0%,100%': { borderColor: '#06B6D4' }, '50%': { borderColor: '#10B981' } },
+            float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+            shimmer: { '0%': { backgroundPosition: '-1000px 0' }, '100%': { backgroundPosition: '1000px 0' } },
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background: radial-gradient(circle at 10% 20%, #0B1120, #050A14);
+      background-attachment: fixed;
+    }
+    /* custom glassmorphism + efek modern */
+    .glass-card {
+      background: rgba(17, 24, 39, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+      transform: translateY(-3px);
+    }
+    .skill-chip {
+      background: rgba(31, 41, 55, 0.7);
+      border: 1px solid #2D3748;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .skill-chip:hover {
+      background: #06B6D4;
+      border-color: #22D3EE;
+      color: #0B1120;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 4px 12px rgba(6,182,212,0.3);
+    }
+    .glow-text {
+      text-shadow: 0 0 6px rgba(6,182,212,0.3);
+    }
+    .custom-scroll::-webkit-scrollbar { width: 5px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #111827; border-radius: 10px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #06B6D4; border-radius: 10px; }
+    
+    /* animasi tambahan untuk elemen */
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px -8px rgba(6,182,212,0.25);
+    }
+    .shimmer-bg {
+      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.1), transparent);
+      background-size: 1000px 100%;
+    }
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* delay classes */
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body class="font-sans text-text-light custom-scroll">
+
+  <div class="max-w-6xl mx-auto px-5 sm:px-6 py-8 md:py-12">
+    
+    <!-- ===== HERO SECTION dengan efek neon dan animasi ===== -->
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 pb-8 mb-8 border-b border-cyan-800/40 animate-fade-up">
+      <div class="space-y-3">
+        <div class="inline-flex items-center gap-2 bg-slate-mid/60 backdrop-blur-sm px-3 py-1 rounded-full border border-cyan-500/30 text-sm animate-slide-left">
+          <i class="fas fa-code text-glow-cyan text-xs animate-pulse"></i> <span>Fullstack Laravel · Mahasiswa Aktif · Professional</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-display font-extrabold tracking-tight bg-gradient-to-r from-white via-cyan-200 to-emerald-200 bg-clip-text text-transparent animate-slide-left delay-100">
+          Yunus <span class="text-glow-cyan animate-glow-pulse inline-block">Arizal</span>
+        </h1>
+        <p class="text-gray-300 max-w-xl text-lg leading-relaxed animate-slide-left delay-200">Membangun ekosistem digital yang scalable dengan Laravel-LiveWire dan semangat belajar berkelanjutan. Juggling antara kampus, karir, dan koding malam hari.</p>
+        <div class="flex flex-wrap gap-3 pt-2 animate-slide-left delay-300">
+          <span class="inline-flex items-center gap-1 text-sm bg-slate-mid/70 px-3 py-1.5 rounded-full border border-gray-700 hover:border-cyan-400 transition-all duration-300"><i class="fas fa-map-marker-alt text-cyan-400"></i> Klaten, ID</span>
+          <span class="inline-flex items-center gap-1 text-sm bg-slate-mid/70 px-3 py-1.5 rounded-full border border-gray-700 hover:border-cyan-400 transition-all duration-300"><i class="far fa-envelope text-cyan-400"></i>yunusrochmain@gmail.com</span>
+          <span class="inline-flex items-center gap-1 text-sm bg-slate-mid/70 px-3 py-1.5 rounded-full border border-gray-700 hover:border-cyan-400 transition-all duration-300"><i class="fab fa-github text-cyan-400"></i> WebITyunus</span>
+        </div>
+      </div>
+      <div class="flex gap-4 animate-slide-right delay-200">
+        <!-- <a href="#" class="group relative px-6 py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 rounded-xl font-semibold text-sm shadow-lg transition-all hover:scale-105 hover:shadow-cyan-500/30 flex items-center gap-2 overflow-hidden"><i class="fas fa-paper-plane"></i> Hubungi Saya<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition duration-300"></div></a> -->
+        <!-- <a href="proyek.html" class="px-6 py-3 border border-cyan-500/60 rounded-xl font-medium text-sm hover:bg-cyan-900/30 hover:border-cyan-400 transition-all duration-300 hover:scale-105 flex items-center gap-2"><i class="fas fa-folder-open"></i> Portfolio</a> -->
+      </div>
+    </div>
+
+    <!-- ===== 2 Kolom: kiri (informasi pribadi, pendidikan, dll) & kanan (pengalaman, skill, portofolio) ===== -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 xl:gap-9">
+      
+      <!-- KOLOM KIRI: biografi singkat, pendidikan, tools favorit, bahasa -->
+      <div class="space-y-7">
+        <!-- About me card -->
+        <div class="glass-card rounded-2xl p-6 animate-on-scroll">
+          <div class="flex items-center gap-3 border-b border-cyan-800/40 pb-4 mb-5">
+            <i class="fas fa-user-astronaut text-2xl text-cyan-400 animate-float"></i>
+            <h2 class="text-xl font-display font-bold tracking-wide">Tentang Saya</h2>
+          </div>
+          <p class="text-gray-200 leading-relaxed text-sm md:text-base">Fullstack developer dengan fokus pada Laravel & ekosistem PHP. Saat ini bekerja sebagai IT STAFF di RS PKU Muhammadiyah sekaligus mahasiswa semester 5 Sistem Informasi (S1). Saya percaya bahwa kode yang bersih dan arsitektur yang rapi adalah fondasi aplikasi masa depan.</p>
+          <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fas fa-check-circle text-emerald-400"></i><span>3+ tahun IT Hardware&Software</span></div>
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fas fa-check-circle text-emerald-400"></i><span>MySQL</span></div>
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fas fa-check-circle text-emerald-400"></i><span>RESTful API / TALL Stack</span></div>
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fas fa-check-circle text-emerald-400"></i><span>Docker dasar</span></div>
+          </div>
+        </div>
+
+        <!-- Pendidikan -->
+        <div class="glass-card rounded-2xl p-6 animate-on-scroll delay-100">
+          <div class="flex items-center gap-3 border-b border-cyan-800/40 pb-4 mb-5">
+            <i class="fas fa-university text-2xl text-emerald-400 animate-float" style="animation-delay: 0.5s;"></i>
+            <h2 class="text-xl font-display font-bold">Pendidikan</h2>
+          </div>
+          <div class="space-y-5">
+            <div class="hover:translate-x-1 transition-transform duration-200">
+              <div class="flex justify-between flex-wrap gap-1"><h3 class="font-bold text-lg">Sekolah Dasar</h3><span class="text-cyan-300 text-xs bg-cyan-950/60 px-2 py-0.5 rounded-full">2010 - 2016</span></div>
+              <p class="text-emerald-300 text-sm">SD N1 Socokangsi</p>
+              <p class="text-gray-400 text-xs mt-1">Fokus: Bidang Olahraga (Futsal,Badminton)</p>
+            </div>
+            <div class="hover:translate-x-1 transition-transform duration-200">
+              <div class="flex justify-between flex-wrap gap-1"><h3 class="font-bold text-lg">Sekolah Menengah Pertama</h3><span class="text-cyan-300 text-xs bg-cyan-950/60 px-2 py-0.5 rounded-full">2016 - 2019</span></div>
+              <p class="text-emerald-300 text-sm">Madrasah Tsanawaiyah N7 Klaten</p>
+              <p class="text-gray-400 text-xs mt-1">Fokus: Bidang Olahraga (Futsal,Badminton,Lari,Berenang)</p>
+            </div>
+            <div class="hover:translate-x-1 transition-transform duration-200">
+              <div class="flex justify-between flex-wrap gap-1"><h3 class="font-bold text-lg">Sekolah Menengah Kejuruan</h3><span class="text-cyan-300 text-xs bg-cyan-950/60 px-2 py-0.5 rounded-full">2019 - 2023</span></div>
+              <p class="text-emerald-300 text-sm">SMK N1 Tulung</p>
+              <p class="text-gray-400 text-xs mt-1">Fokus: Bidang Olahraga (Lari,Berenang),Bidang Teknologi(Mikrotik,Web Developer HTML,CSS,JS)</p>
+            </div>
+            <div class="hover:translate-x-1 transition-transform duration-200">
+              <div class="flex justify-between flex-wrap gap-1"><h3 class="font-bold text-lg">Semester 5 Sistem Informasi</h3><span class="text-cyan-300 text-xs bg-cyan-950/60 px-2 py-0.5 rounded-full">2024 - sekarang</span></div>
+              <p class="text-emerald-300 text-sm">Universitas Terbuka Surakarta</p>
+              <p class="text-gray-400 text-xs mt-1">Fokus: Rekayasa Perangkat Lunak, Basis Data Lanjut, dan Framework Modern.</p>
+            </div>
+            <div class="hover:translate-x-1 transition-transform duration-200">
+              <div class="flex justify-between flex-wrap gap-1"><h3 class="font-bold text-lg">Course Fullstack Developer</h3><span class="text-cyan-300 text-xs bg-cyan-950/60 px-2 py-0.5 rounded-full">2023-2025</span></div>
+              <p class="text-emerald-300 text-sm">Web Progaming Unpas(Backend PHP dan Frontend Css,Boostrap),Codepolitan(Kelas Fullstack)</p>
+              <p class="text-gray-400 text-xs mt-1">Laravel, Boostrap, TailwindCSS, VueJS, Mysql, MongoDB, Codeigniter, GIT</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bahasa & Sertifikasi keren -->
+        <div class="glass-card rounded-2xl p-6 animate-on-scroll delay-200">
+          <div class="flex items-center gap-3 border-b border-cyan-800/40 pb-4 mb-5">
+            <i class="fas fa-globe text-2xl text-cyan-400 animate-float" style="animation-delay: 1s;"></i>
+            <h2 class="text-xl font-display font-bold">Bahasa & Sertif</h2>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-slate-mid/80 px-3 py-1.5 rounded-full text-sm border border-gray-600 hover:border-cyan-400 hover:scale-105 transition-all duration-200"><i class="fas fa-flag-id mr-1 text-cyan-400"></i>Indonesia (native)</span>
+            <span class="bg-slate-mid/80 px-3 py-1.5 rounded-full text-sm border border-gray-600 hover:border-cyan-400 hover:scale-105 transition-all duration-200"><i class="fas fa-flag-usa mr-1 text-emerald-400"></i>English (Dasar)</span>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fab fa-laravel text-cyan-400 w-5"></i><span>Laravel Developer (WPU & Codepolitan)</span></div>
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fas fa-database text-emerald-400 w-5"></i><span>MYSQL (Codepolitan)</span></div>
+            <div class="flex items-center gap-2 hover:translate-x-1 transition-transform duration-200"><i class="fab fa-docker text-cyan-400 w-5"></i><span>Docker (Progamer Zaman Now)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: Pengalaman, skill, portofolio -->
+      <div class="lg:col-span-2 space-y-7">
+        <!-- Pengalaman professional (swasta + freelance) -->
+        <div class="glass-card rounded-2xl p-6 animate-on-scroll">
+          <div class="flex items-center gap-3 border-b border-cyan-800/40 pb-4 mb-6">
+            <i class="fas fa-briefcase text-2xl text-emerald-400 animate-float"></i>
+            <h2 class="text-xl font-display font-bold">Pengalaman Kerja</h2>
+            <span class="ml-auto text-xs bg-cyan-900/60 px-2 py-1 rounded-full shimmer-bg animate-shimmer"><i class="fas fa-badge-check"></i> Full-time & Freelance</span>
+          </div>
+          <div class="space-y-7">
+            <div class="relative pl-0 border-l-2 border-cyan-500/50 ml-3 pl-5 hover:border-cyan-400 transition-colors duration-300">
+              <div class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-cyan-400 ring-4 ring-slate-card/90 animate-pulse"></div>
+              <div class="flex justify-between flex-wrap"><h3 class="font-bold text-lg">Staff IT</h3><span class="text-xs text-cyan-300">2023 - sekarang</span></div>
+              <p class="text-emerald-300 text-sm font-mono"> Rumah Sakit Umum Muhammadiyah</p>
+              <p class="text-gray-300 text-sm mt-1 leading-relaxed"> Membuat Aplikasi Web E-Arsip dan E-Cuti</p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">laravel-13</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">admin-dashboard</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">Mysql</span>
+              </div>
+            </div>
+            <div class="relative pl-0 border-l-2 border-cyan-500/50 ml-3 pl-5 hover:border-cyan-400 transition-colors duration-300">
+              <div class="absolute -left-[9px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-400 ring-4 ring-slate-card/90"></div>
+              <div class="flex justify-between flex-wrap"><h3 class="font-bold text-lg">Freelance Web Developer</h3><span class="text-xs text-cyan-300">2023 - sekarang</span></div>
+              <p class="text-emerald-300 text-sm font-mono">Client UMKM & Perusahaan</p>
+              <p class="text-gray-300 text-sm mt-1 leading-relaxed"> Membangun  aplikasi custom, mulai dari sistem booking, website company profile sampai platform e-commerce multi-tenant. Menggunakan TALL stack</p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">TailwindCSS</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">AlpineJs</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">LiveWire</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">Laravel</span>
+                <!-- <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">VueJS</span> -->
+                <span class="text-[11px] bg-cyan-900/50 px-2 py-0.5 rounded hover:bg-cyan-500/60 transition-all">MySQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack yang kuat (Laravel + fullstack) tampilan modern -->
+        <div class="glass-card rounded-2xl p-6 animate-on-scroll delay-100">
+          <div class="flex items-center gap-3 border-b border-cyan-800/40 pb-4 mb-5">
+            <i class="fas fa-layer-group text-2xl text-cyan-400 animate-spin-slow"></i>
+            <h2 class="text-xl font-display font-bold">Tech Stack & Keahlian</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <h3 class="font-semibold flex items-center gap-2"><i class="fab fa-laravel text-cyan-400"></i> Backend & Database</h3>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Laravel (11-terbaru)</span>
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">PHP 8+</span>
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">MySQL</span>
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">REST API</span>
+                <!-- <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Redis</span> -->
+              </div>
+            </div>
+         <div>
+    <h3 class="font-semibold flex items-center gap-2">
+        <i class="fas fa-code text-pink-500"></i>
+        Frontend & Styling
+    </h3>
+
+    <div class="flex flex-wrap gap-2 mt-2">
+        <span class="skill-chip px-3 py-1.5 text-xs rounded-full">TailwindCSS</span>
+        <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Alpine.js</span>
+        <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Livewire</span>
+        <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Bootstrap 5</span>
+    </div>
+</div>
+            <div>
+              <h3 class="font-semibold flex items-center gap-2"><i class="fas fa-tools text-cyan-400"></i> DevOps & Tools</h3>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Git/Github Actions</span>
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Postman</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold flex items-center gap-2"><i class="fas fa-pen-fancy text-emerald-400"></i> Soft skill</h3>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Team Leading</span>
+                <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Problem Solving</span>
+                <!-- <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Agile/Scrum</span> -->
+                <!-- <span class="skill-chip px-3 py-1.5 text-xs rounded-full">Mentoring</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PORTOFOLIO (proyek Laravel + fullstack unggulan) -->
+        <div id="portfolio" class="glass-card rounded-2xl p-6 animate-on-scroll delay-200">
+          <div class="flex items-center justify-between flex-wrap gap-2 border-b border-cyan-800/40 pb-4 mb-5">
+            <div class="flex items-center gap-3"><i class="fas fa-rocket text-2xl text-cyan-400 animate-float"></i><h2 class="text-xl font-display font-bold">Proyek Unggulan</h2></div>
+            <span class="text-xs bg-emerald-900/40 text-emerald-300 px-3 py-1 rounded-full shimmer-bg animate-shimmer">Fullstack berbasis Laravel</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- project 1 -->
+            <div class="bg-slate-mid/40 rounded-xl p-4 hover:shadow-cyan-900/20 hover:shadow-lg transition-all duration-300 border border-gray-700/50 group hover-lift">
+              <div class="flex justify-between items-start"><i class="fab fa-laravel text-3xl text-cyan-400 group-hover:scale-110 transition-transform"></i><span class="text-[10px] bg-cyan-950/70 px-2 py-1 rounded">2025</span></div>
+              <h3 class="font-bold text-lg mt-2">E-CUTI Rumah Sakit</h3>
+              <p class="text-gray-300 text-xs mt-1">Laravel 12 + Breeze + Mysql + Scan Barcode. Aplikasi internal dengan pengajuan realtime & role management</p>
+              <div class="flex flex-wrap gap-1 mt-3">
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">Laravel</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">TallwindCss</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">Laravel Reverb</span>
+              </div>
+            </div>
+            <!-- project 2 -->
+            <div class="bg-slate-mid/40 rounded-xl p-4 hover:shadow-cyan-900/20 hover:shadow-lg transition-all duration-300 border border-gray-700/50 group hover-lift">
+              <div class="flex justify-between items-start"><i class="fab fa-laravel text-3xl text-cyan-400 group-hover:scale-110 transition-transform"></i><span class="text-[10px] bg-cyan-950/70 px-2 py-1 rounded">2023</span></div>
+              <h3 class="font-bold text-lg mt-2">E-ARSIP Rumah Sakit</h3>
+              <p class="text-gray-300 text-xs mt-1"> Laravel + LiveWire + Fitur Role management dan Fitur Hak Akses dengan Laravel Spatie Permission</p>
+              <div class="flex flex-wrap gap-1 mt-3">
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">Laravel-13</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">LiveWire</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">TallwindCss</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">AlpineJs</span>
+              </div>
+            </div>
+            <!-- project 3 full width preview -->
+            <div class="bg-slate-mid/40 rounded-xl p-4 md:col-span-2 flex flex-col md:flex-row gap-4 border border-gray-700/50 group hover-lift">
+              <div class="flex-1"><i class="fas fa-chalkboard-user text-2xl text-cyan-400 group-hover:scale-110 transition-transform inline-block"></i><h3 class="font-bold text-lg mt-1">Frelancer Membuat Web Aplication</h3>
+              <p class="text-gray-300 text-xs mt-1">Arsitektur TALL Stack dan Optimasi Database Untuk Menjaga Performan Web Application</p>
+              <div class="flex gap-2 mt-2">
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">Laravel</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">LiveWire</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">AlpineJS</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">TailwindCSS/Boostrap</span>
+                <span class="text-[11px] bg-cyan-900/50 px-2 rounded hover:bg-cyan-500/50 transition-all">MYSQL</span>
+              </div>
+              </div>
+              <div class="flex items-center"><i class="fas fa-arrow-right text-cyan-400 text-xl group-hover:translate-x-2 transition-transform duration-300"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- kutipan / testimoni ringan -->
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-cyan-400 animate-on-scroll delay-300">
+          <i class="fas fa-quote-right text-cyan-700 text-3xl mb-2 block animate-float"></i>
+          <p class="italic text-gray-200 text-sm">"Menjadi mahasiswa sekaligus pekerja swasta mengajarkan saya disiplin dan manajemen waktu ekstrem. Setiap hari adalah kesempatan untuk menulis kode yang lebih baik dan belajar hal baru."</p>
+          <p class="text-cyan-300 text-xs mt-3 font-mono">— Yunus Arizal, Fullstack Laravel Developer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KONTAK & SOSIAL MEDIA ===== -->
+    <div id="contact" class="mt-12 pt-8 border-t border-cyan-800/50 flex flex-col md:flex-row justify-between items-center gap-5 animate-on-scroll delay-400">
+      <div class="flex gap-7 text-gray-300 text-xl">
+        <a href="#" class="hover:text-cyan-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 inline-block"><i class="fab fa-github"></i></a>
+        <a href="#" class="hover:text-cyan-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 inline-block"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="hover:text-cyan-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 inline-block"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-cyan-400 transition-all duration-300 hover:scale-110 hover:-translate-y-1 inline-block"><i class="fab fa-dev"></i></a>
+      </div>
+      <div class="text-sm text-gray-400 flex flex-wrap gap-5 justify-center">
+        <span class="hover:text-cyan-300 transition-colors duration-200"><i class="fas fa-envelope text-cyan-400 mr-1"></i> yunusrochmain@gmail.com</span>
+        <span class="hover:text-cyan-300 transition-colors duration-200"><i class="fas fa-phone-alt text-emerald-400 mr-1"></i> +62 895-3235-25336</span>
+        <span class="hover:text-cyan-300 transition-colors duration-200"><i class="fas fa-map-pin text-cyan-400 mr-1"></i> Klaten / Frelance Remote</span>
+      </div>
+      <p class="text-xs text-gray-500">© 2025 — Yunus Arizal | Fullstack Laravel Portfolio + CV</p>
+    </div>
+  </div>
+  
+  <!-- floating back to top dengan animasi -->
+  <a href="#" class="fixed bottom-5 right-5 bg-slate-mid/80 backdrop-blur p-3 rounded-full border border-cyan-500/40 text-cyan-300 hover:bg-cyan-600/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/20 group"><i class="fas fa-arrow-up group-hover:-translate-y-0.5 transition-transform"></i></a>
+
+  <!-- Scroll Animation Trigger -->
+  <script>
+    // Intersection Observer untuk animasi scroll
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // sekali saja
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // sedikit efek tambahan: hover pada skill chips lebih smooth
+    console.log('Animations enabled — Yunus Arizal Portfolio');
+  </script>
+</body>
+</html>
